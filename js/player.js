@@ -1,19 +1,27 @@
-class Player{
-  constructor(name, avatar){
+import { weapon1 } from './assets';
+import { weapon4 } from './assets';
+
+class Player {
+  constructor(name, avatar, id) {
     this.name = name;
-    this.avatar = avatar
+    this.avatar = avatar;
+    this.id = id;
   }
 
-  generate(){
+  generate() {
     return {
-      id : 1,
+      id: this.id,
       name: this.name,
-      avatar: this.avatar,
+      avatar: `<img src="${this.avatar}" alt="${this.name}" />`,
       health: 100,
       shield: false,
       weapon: {
-        image: '',
-        damage: 10 
+        image: `<img src="${weapon1}" alt="" />`,
+        damage: 10
+      },
+      position: {
+        col: 0,
+        row: 0
       }
     }
   }

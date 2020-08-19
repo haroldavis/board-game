@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+}
+h1 {
+  text-align: center;
+  margin: 0;
+}
+
+:root {
+  --square-size: 58px;
+}
+
+.btn-main {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0px;
+}
+#newGame,
+#rules {
+  padding: 5px 8px;
+  margin: 0 10px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(9, var(--square-size));
+  grid-template-rows: repeat(9, var(--square-size));
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+#grid img {
+  display: block;
+  object-fit: contain;
+  width: 90%;
+  height: 90%;
+}
+
+#grid > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 1px #000000;
+}
+
+.highlight {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7) !important;
+}
+
+.square:hover {
+  background-color: limegreen;
+  color: #fff;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: tomato;
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
+.panel img {
+  width: 50px;
+}
+
+.current {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.player-mask {
+  margin: 0;
+  text-align: center;
+}
+.player-life {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.box {
+  text-align: center;
+  padding: 5px 0;
+}
+.box h4 {
+  margin: 0;
+}
+.modal {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+.modal.open {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  z-index: 99;
+}
+.modal-content {
+  background-color: #fff;
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  padding: 40px;
+  transition: all 0.5s cubic-bezier(0.05, 0.94, 0.89, 0.27);
+  opacity: 0;
+  transform: translateY(-300px);
+}
+.open .modal-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal-content button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: tomato;
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: none;
+  cursor: pointer;
+}
