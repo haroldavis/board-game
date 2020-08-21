@@ -17,7 +17,8 @@ class Player {
       shield: false,
       weapon: {
         image: `<img src="${weapon1}" alt="" />`,
-        damage: 10
+        damage: 10,
+        oldWeapon: ``
       },
       position: {
         col: 0,

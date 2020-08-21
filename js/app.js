@@ -15,7 +15,7 @@ const game = new Game([playerOne, playerTwo]);
 
 document.querySelector('#newGame').addEventListener('click', () => {
   game.init()
-  game.moviePlayer()
+
 });
 
 document.querySelector('#rules').addEventListener('click', () => {

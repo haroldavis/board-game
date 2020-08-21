@@ -51,9 +51,7 @@ class Game {
 
     this.currentPlayer = this.players[Math.floor(Math.random() * this.players.length)];
 
-    this.playerHighlights()
-
-    document.querySelector(`#player${this.players[this.currentPlayer.id - 1].id}`).classList.add('current')
+    this.detectTurn()
 
   }
 
@@ -101,8 +99,8 @@ class Game {
   playerHighlights = () => {
     const position = this.currentPlayer.position;
 
-    const row = Number(position.row);
     const col = Number(position.col);
+    const row = Number(position.row);
 
     const moves = (direction, operator) => {
 
@@ -121,31 +119,80 @@ class Game {
       if (!move1) return;
       if (move1.classList.contains('obstacle') || move1.classList.contains('player')) return;
       move1.classList.add('highlight');
+      move1.addEventListener('click', this.movePlayer);
+
 
       if (!move2) return;
       if (move2.classList.contains('obstacle') || move2.classList.contains('player')) return
       move2.classList.add('highlight');
+      move2.addEventListener('click', this.movePlayer);
+
 
       if (!move3) return;
       if (move3.classList.contains('obstacle') || move3.classList.contains('player')) return;
       move3.classList.add('highlight');
+      move3.addEventListener('click', this.movePlayer);
+
 
     }
 
     moves('north', '-');
     moves('south', '+');
-
     moves('west', '-');
     moves('east', '+');
-    
+
   }
 
-  moviePlayer = () => {
-    let posibleMoves = document.querySelectorAll('.highlight');
-    console.log(posibleMoves)
-    posibleMoves.forEach(e => console.log(e.dataset))
-    
-    
+  movePlayer = (e) => {
+
+    const prevPosition = document.querySelector(`[data-column="${this.currentPlayer.position.col}"][data-row="${this.currentPlayer.position.row}"]`)
+
+
+    this.players[this.currentPlayer.id - 1].position.col = e.target.dataset.column
+    this.players[this.currentPlayer.id - 1].position.row = e.target.dataset.row
+
+
+
+    //e.classList.add('current')
+    prevPosition.innerHTML = '';
+    prevPosition.classList.remove('player');
+    e.target.innerHTML = this.currentPlayer.avatar;
+
+
+
+    const removeHighlights = () => {
+      const posibleMoves = document.querySelectorAll('.highlight');
+
+      posibleMoves.forEach(elm => {
+        elm.classList.remove('highlight')
+      })
+    }
+
+    removeHighlights();
+
+
+    setTimeout(this.changeTurn, 500);
+
+  }
+
+  changeTurn = () => {
+    document.querySelector(`#player${this.players[this.currentPlayer.id - 1].id}`).classList.remove('current');
+
+    if (this.currentPlayer.id === 1) {
+      this.currentPlayer = this.players[1];
+    } else {
+      this.currentPlayer = this.players[0];
+    }
+
+    setTimeout(this.detectTurn, 500);
+  }
+
+  detectTurn = () => {
+    this.playerHighlights();
+
+    console.log(this.currentPlayer)
+
+    document.querySelector(`#player${this.players[this.currentPlayer.id - 1].id}`).classList.add('current');
   }
 };
 
